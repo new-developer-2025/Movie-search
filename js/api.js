@@ -40,3 +40,5 @@ export async function searchShows(query) {
   if (!res.ok) throw new Error("Failed to fetch shows");
   return res.json(); // returns an array
 }
+
+

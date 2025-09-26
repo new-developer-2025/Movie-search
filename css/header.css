@@ -220,7 +220,7 @@ a {
   width: 60px;
   height: 60px;
   animation: spin 1s linear infinite;
-  display: none; /* ابتدا مخفی */
+  display: none; 
   position: fixed;
   top: 50%;
   left: 50%;
@@ -244,4 +244,30 @@ a {
     opacity: 1;
     transform: scale(1);
   }
+}
+/* drop-down */
+.dropdown-content {
+  display: none; 
+  position: absolute;
+  top: 15%;
+  right: 0;
+  background-color: #222;
+  min-width: 200px;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #444;
+  z-index: 999;
+  border-radius: 4px;
+}
+
+.dropdown-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  color: #fff;
+  text-align: left;
+  transition: background 0.2s ease-in-out;
+}
+
+.dropdown-item:hover {
+  background-color: #444;
 }

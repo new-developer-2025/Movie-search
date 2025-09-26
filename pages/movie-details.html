@@ -24,7 +24,7 @@
             </li>
             <!-- input for search form -->
             <li class="search-box">
-              <form action="" role="search" id="search-form">
+              <form action="" role="search" id="search-form" autocomplete="off">
                 <div id="error-message"></div>
                 <input
                   type="text"
@@ -39,6 +39,8 @@
                   width="15px"
                   height="15px"
                 />
+                <!-- dropdown -->
+                <div class="dropdown-content" id="dropdown-content"></div>
               </form>
             </li>
             <!-- dropdown -->
@@ -51,10 +53,6 @@
                 <span class="down-item">Genres</span>
                 <img src="../images/arrow-down.png" alt="arrow-down" />
               </button>
-              <!-- dropdown-content -->
-              <div class="dropdown-content">
-                <!-- fill with Api -->
-              </div>
             </li>
           </ul>
         </nav>
@@ -71,5 +69,3 @@
     <!-- end-project -->
   </body>
 </html>
-
-

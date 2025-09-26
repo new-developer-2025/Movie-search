@@ -24,14 +24,9 @@
             </li>
             <!-- input for search form -->
             <li class="search-box">
-              <form action="" role="search" id="search-form">
+              <form action="" role="search" id="search-form" autocomplete="off">
                 <div id="error-message"></div>
-                <input
-                  type="text"
-                  placeholder="Search IMDb"
-                  aria-label="Search IMDb"
-                  id="searchInput"
-                />
+                <input type="text" placeholder="Search IMDb" id="searchInput" />
                 <img
                   src="../images/magnifying-glass.svg"
                   alt="Search"
@@ -39,24 +34,9 @@
                   width="15px"
                   height="15px"
                 />
-                <!-- pagination -->
-                <div id="pagination"></div>
+                <!-- dropdown -->
+                <div class="dropdown-content" id="dropdown-content"></div>
               </form>
-            </li>
-            <!-- dropdown -->
-            <li class="dropdown">
-              <button
-                class="dropbtn"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <span class="down-item">Genres</span>
-                <img src="../images/arrow-down.png" alt="arrow-down" />
-              </button>
-              <!-- dropdown-content -->
-              <div class="dropdown-content">
-                <!-- fill with Api -->
-              </div>
             </li>
           </ul>
         </nav>

@@ -7,6 +7,21 @@
 }
 /* responsive for header elements*/
 @media (max-width: 768px) {
+  .dropdown-content {
+    position: absolute;
+    top: 85%;
+    right: 0;
+  }
+  .action-row{
+    justify-content: space-between;
+  }
+  .hero-content {
+    display: none;
+  }
+  .overlay {
+    position: absolute;
+    top: 0;
+  }
   .overlay ul {
     flex-direction: column;
     gap: 12px;
