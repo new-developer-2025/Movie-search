@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie page</title>
+    <meta
+      name="description"
+      content="Find movies, reviews, and ratings on IMDb clone project"
+    />
+    <!-- css-link -->
+    <link rel="stylesheet" href="../css/link.css" />
+  </head>
+  <body>
+    <!-- hero-section -->
+    <div>
+      <!-- header -->
+      <header class="site-header">
+        <!-- overlay -->
+        <nav class="overlay">
+          <ul>
+            <li>
+              <img src="../images/header-icon.png" alt="IMDb" class="picture" />
+            </li>
+            <!-- input for search form -->
+            <li class="search-box">
+              <form action="" role="search" id="search-form">
+                <div id="error-message"></div>
+                <input
+                  type="text"
+                  placeholder="Search IMDb"
+                  aria-label="Search IMDb"
+                  id="searchInput"
+                />
+                <img
+                  src="../images/magnifying-glass.svg"
+                  alt="Search"
+                  class="magnifying-glass"
+                  width="15px"
+                  height="15px"
+                />
+              </form>
+            </li>
+            <!-- dropdown -->
+            <li class="dropdown">
+              <button
+                class="dropbtn"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <span class="down-item">Genres</span>
+                <img src="../images/arrow-down.png" alt="arrow-down" />
+              </button>
+              <!-- dropdown-content -->
+              <div class="dropdown-content">
+                <!-- fill with Api -->
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <!-- loader -->
+      <div id="loader" class="loader"></div>
+      <!-- Results -->
+      <main class="bg-none">
+        <div id="results"></div>
+      </main>
+    </div>
+    <!-- js-link -->
+    <script type="module" src="../js/movie-details.js"></script>
+    <!-- end-project -->
+  </body>
+</html>
+
+

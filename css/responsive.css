@@ -1,0 +1,66 @@
+/* responsive for laptop */
+@media (max-width: 1024px) {
+  .dropdown {
+    position: relative;
+    background-color: #1a1a1a;
+  }
+}
+/* responsive for header elements*/
+@media (max-width: 768px) {
+  .overlay ul {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .input {
+    max-width: 100%;
+  }
+  .hero-section {
+    background: url(../images/hero.jpg) left center / cover no-repeat;
+  }
+  .hero-information {
+    width: 100%;
+    max-width: 432px;
+  }
+  .hero-title {
+    font-size: 1.5rem;
+  }
+  .hero-geners {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+  .genere-btn {
+    width: 100%;
+    text-align: center;
+  }
+  .hero-description {
+    width: 100%;
+    font-size: 1rem;
+  }
+  .picture-style {
+    max-height: 400px;
+    margin-top: 100px;
+    border-radius: 3px;
+  }
+  .search-box {
+    margin: 25px 0 0 0;
+  }
+}
+
+@media (max-width: 425px) {
+  .hero-section {
+    background: url(../images/hero.jpg) 40% center / cover no-repeat;
+  }
+  .genere-btn {
+    width: 100%;
+    max-width: 100%;
+    margin: 5px 0;
+  }
+  .hero-description {
+    padding: 0 10px;
+  }
+  .show-activity {
+    padding: 35px 10px;
+  }
+}

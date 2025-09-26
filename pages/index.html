@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home page</title>
+    <meta
+      name="description"
+      content="Find movies, reviews, and ratings on IMDb clone project"
+    />
+    <!-- css-link -->
+    <link rel="stylesheet" href="../css/link.css" />
+  </head>
+  <body>
+    <!-- hero-section -->
+    <div class="hero-section">
+      <!-- header -->
+      <header class="site-header">
+        <!-- overlay -->
+        <nav class="overlay">
+          <ul>
+            <li>
+              <img src="../images/header-icon.png" alt="IMDb" class="picture" />
+            </li>
+            <!-- input for search form -->
+            <li class="search-box">
+              <form action="" role="search" id="search-form">
+                <div id="error-message"></div>
+                <input
+                  type="text"
+                  placeholder="Search IMDb"
+                  aria-label="Search IMDb"
+                  id="searchInput"
+                />
+                <img
+                  src="../images/magnifying-glass.svg"
+                  alt="Search"
+                  class="magnifying-glass"
+                  width="15px"
+                  height="15px"
+                />
+                <!-- pagination -->
+                <div id="pagination"></div>
+              </form>
+            </li>
+            <!-- dropdown -->
+            <li class="dropdown">
+              <button
+                class="dropbtn"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <span class="down-item">Genres</span>
+                <img src="../images/arrow-down.png" alt="arrow-down" />
+              </button>
+              <!-- dropdown-content -->
+              <div class="dropdown-content">
+                <!-- fill with Api -->
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <!-- loader -->
+      <div id="loader" class="loader"></div>
+      <!-- hero-content -->
+      <div class="hero-content">
+        <!-- hero-informatoin -->
+        <div class="hero-information">
+          <section class="parent-hero-title">
+            <h1 class="hero-title white">Dune: Part Two</h1>
+          </section>
+          <!-- hero-generes-btn -->
+          <div class="hero-geners" role="group" aria-label="movie genres">
+            <button class="genere-btn">Action</button>
+            <button class="genere-btn">Adventure</button>
+            <button class="genere-btn">Drama</button>
+          </div>
+          <!-- hero-description -->
+          <p class="hero-description">
+            Paul Atreides unites with Chani and the Fremen while seeking revenge
+            against the conspirators who destroyed his family.
+          </p>
+          <h4 class="show-activity">In theaters</h4>
+        </div>
+      </div>
+    </div>
+    <!-- Results -->
+    <main>
+      <div id="results"></div>
+    </main>
+    <!-- js-link -->
+    <script type="module" src="../js/app.js"></script>
+    <!-- end-project -->
+  </body>
+</html>

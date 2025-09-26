@@ -1,0 +1,247 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul,
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+.white {
+  color: #ffffff;
+}
+/* header */
+.site-header {
+  width: 100%;
+  height: 90px;
+  padding: 16px 32px;
+}
+#searchInput {
+  padding: 8px;
+  width: 200px;
+  border-radius: 5px;
+  border: none;
+}
+#searchBtn {
+  padding: 8px 12px;
+  margin-left: 8px;
+  border: none;
+  border-radius: 5px;
+  background: #fff;
+  color: dodgerblue;
+  font-weight: bold;
+  cursor: pointer;
+}
+/* overlay */
+.overlay ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+/* logo */
+.picture {
+  width: 116px;
+  height: 58px;
+  object-fit: contain;
+}
+/* input */
+.search-box {
+  width: 100%;
+  min-width: 300px;
+  max-width: 916px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 0 8px;
+  background-color: #1a1a1a;
+}
+.search-box form {
+  width: inherit;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background-color: #1a1a1a;
+  color: #fff;
+  text-align: center;
+}
+.search-box img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.input:focus {
+  outline: 2px solid #fff;
+}
+/* search button */
+.search-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.magnifying-glass {
+  width: 32px;
+  height: 32px;
+}
+/* dropdown */
+.dropdown {
+  position: relative;
+  background-color: #1a1a1a;
+}
+.dropdown .dropbtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 16px;
+  color: #fff;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  padding: 8px 0;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+/* hero-section */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: url("../images/hero.jpg") center left / cover no-repeat;
+}
+/* hero-content */
+.hero-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* hero-information */
+.hero-information {
+  width: 432px;
+  min-height: 236px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+/* inner-hero */
+.hero-geners {
+  margin: 15px 0 20px 0;
+}
+.genere-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid #fff;
+  border-radius: 30px;
+  background-color: transparent;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.genere-btn:hover {
+  background-color: #fff;
+  color: dodgerblue;
+}
+.hero-description {
+  width: 432px;
+  height: 72px;
+  margin-top: 20px;
+}
+.hero-description,
+.show-activity {
+  color: #ffffff;
+}
+.btn-style {
+  background-color: none;
+}
+.show-activity {
+  /* margin-top: 10px; */
+  padding: 19px 0 0 0;
+  font-family: sans-serif;
+  font-style: bold;
+}
+/* error-message */
+#error-message {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  display: none;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  margin: 100px 0 0 0;
+}
+/* error-icon */
+.error-icon {
+  width: 24px;
+  height: 24px;
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+/* Loader spinner */
+#loader {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid dodgerblue;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  display: none; /* ابتدا مخفی */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
