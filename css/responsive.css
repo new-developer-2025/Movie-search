@@ -7,6 +7,9 @@
 }
 /* responsive for header elements*/
 @media (max-width: 768px) {
+  .site-header {
+    padding: 0 0;
+  }
   .dropdown-content {
     position: absolute;
     top: 85%;
@@ -23,7 +26,7 @@
     top: 0;
     display: block;
     width: 100%;
-    max-width: 650px;
+    max-width: 550px;
   }
   .overlay ul {
     flex-direction: column;
