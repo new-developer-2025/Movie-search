@@ -12,7 +12,7 @@
     top: 85%;
     right: 0;
   }
-  .action-row{
+  .action-row {
     justify-content: space-between;
   }
   .hero-content {
@@ -21,6 +21,9 @@
   .overlay {
     position: absolute;
     top: 0;
+    display: block;
+    width: 100%;
+    max-width: 650px;
   }
   .overlay ul {
     flex-direction: column;
@@ -61,6 +64,12 @@
   .search-box {
     margin: 25px 0 0 0;
   }
+  .res-img {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    background-color: burlywood;
+  }
 }
 
 @media (max-width: 425px) {
@@ -77,5 +86,16 @@
   }
   .show-activity {
     padding: 35px 10px;
+  }
+  .res-img {
+    max-width: 280px;
+    background-color: burlywood;
+  }
+  .release {
+    position: absolute;
+    top: 8%;
+    display: block;
+    width: 100%;
+    padding: 0 0 0 6px;
   }
 }

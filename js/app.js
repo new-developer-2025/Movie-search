@@ -1,15 +1,13 @@
-
 import { loadGenres, searchMovies } from "./api.js";
 import { renderResults } from "./render.js";
+
 // Dom elements
 const form = document.querySelector("#search-form");
 const searchInput = document.getElementById("searchInput");
 const resultsContainer = document.getElementById("results");
 const errorMessage = document.getElementById("error-message");
 const loader = document.getElementById("loader");
-// dropdownContent
 const dropdownContent = document.getElementById("dropdown-content");
-
 
 let genreMap = {};
 // showLoader
@@ -54,33 +52,42 @@ searchInput.addEventListener("input", async () => {
   }
 
   try {
-    const res = await fetch(
-      `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(query)}`
-    );
-    if (!res.ok) throw new Error("Failed to fetch shows");
-    const data = await res.json();
-
-    if (data.length === 0) {
+    // data
+    const data = await searchMovies(query);
+    if (!data.results.length) {
       dropdownContent.style.display = "none";
       return;
     }
-
     // for fill all items
-    data.forEach((item) => {
-      const option = document.createElement("div");
+    data.results.slice(0, 8).forEach((movie) => {
+      const option = document.createElement("a");
       option.className = "dropdown-item";
-      option.textContent = item.show.name;
-
+      // posterPath
+      const posterPath = movie.poster_path
+        ? `https://image.tmdb.org/t/p/w92${movie.poster_path}`
+        : "../images/placeholder.png"; 
+      // genres
+      const genres = movie.genre_ids?.length
+        ? movie.genre_ids.map((id) => genreMap[id]).join("  ")
+        : "Unknown";
+      option.innerHTML = `
+        <div class="dropdown-movie">
+          <img src="${posterPath}" alt="${movie.title}" class="dropdown-poster" />
+          <div class="dropdown-info">
+            <p class="movie-title">${movie.title}</p>
+            <p class="movie-genres">${genres}</p>
+          </div>
+        </div>
+      `;
       // when i want to clik item go to details page
       option.addEventListener("click", () => {
-        searchInput.value = item.show.name;
+        // searchInput.value = item.show.name;
+        searchInput.value = movie.title;
         dropdownContent.innerHTML = "";
         dropdownContent.style.display = "none";
-
-        // redirect id and go to details page
-        window.location.href = `movie-details.html?id=${item.show.id}`;
+        // redirect to details page with TMDB movie id
+        window.location.href = `genres.html?id=${movie.id}`;
       });
-
       dropdownContent.appendChild(option);
     });
     // open dropdown menu

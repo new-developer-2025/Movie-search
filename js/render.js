@@ -30,6 +30,7 @@ function createPosterImg(movie, { width = 300, height = 450 } = {}) {
       `${TMDB_BASE_ROOT}w780${movie.poster_path} 780w`,
     ].join(", ");
     img.sizes = "(max-width: 600px) 50vw, 300px";
+    img.classList.add("res-img");
   }
 
   img.onerror = () => {
@@ -38,7 +39,7 @@ function createPosterImg(movie, { width = 300, height = 450 } = {}) {
     img.removeAttribute("sizes");
     img.src = placeholder;
   };
-
+  
   return img;
 }
 // renderResults for TMDB
@@ -97,13 +98,11 @@ export function renderResults(movies, genreMap, resultsContainer) {
 
     card.appendChild(poster);
     card.appendChild(section);
-    card.appendChild(viewInfoBtn);
-    // اضافه کردن المنت‌ها به این ردیف
     actionRow.appendChild(ratingStar);
     actionRow.appendChild(voteAverage);
     actionRow.appendChild(viewInfoBtn);
     resultsContainer.appendChild(card);
-    // اضافه کردن به کارت
+    // add to the card
     card.appendChild(actionRow);
   });
 }
@@ -143,15 +142,12 @@ export function renderMovieDetails(movie, resultsContainer) {
 
   // release
   const release = document.createElement("div");
-  release.innerHTML = `<span>Release:</spa> ${movie.release_date}`;
+  release.innerHTML = `<p>Release: ${movie.release_date}</p>`;
   release.classList.add("release");
 
   section.appendChild(poster);
   section.appendChild(genres);
   section.appendChild(overview);
   section.appendChild(release);
-
-  // container.appendChild(backButton);
   resultsContainer.appendChild(section);
 }
-

@@ -1,11 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>genres page</title>
-</head>
-<body>
-    
-</body>
+    <meta
+      name="description"
+      content="Find movies, reviews, and ratings on IMDb clone project"
+    />
+    <!-- css-link -->
+    <link rel="stylesheet" href="../css/link.css" />
+  </head>
+  <body>
+    <!-- hero-section -->
+    <div>
+      <!-- header -->
+      <header class="site-header">
+        <!-- overlay -->
+        <nav class="overlay">
+          <ul>
+            <li>
+              <img src="../images/header-icon.png" alt="IMDb" class="picture" />
+            </li>
+            <!-- input for search form -->
+            <li class="search-box">
+              <form action="" role="search" id="search-form" autocomplete="off">
+                <div id="error-message"></div>
+                <input
+                  type="text"
+                  placeholder="Search IMDb"
+                  aria-label="Search IMDb"
+                  id="searchInput"
+                />
+                <img
+                  src="../images/magnifying-glass.svg"
+                  alt="Search"
+                  class="magnifying-glass"
+                  width="15px"
+                  height="15px"
+                />
+                <!-- dropdown -->
+                <div class="dropdown-content" id="dropdown-content"></div>
+              </form>
+            </li>
+            <!-- dropdown -->
+            <li class="dropdown">
+              <button
+                class="dropbtn"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <span class="down-item">Genres</span>
+                <img src="../images/arrow-down.png" alt="arrow-down" />
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <!-- loader -->
+      <div id="loader" class="loader"></div>
+      <!-- Results -->
+      <main class="bg-none">
+        <div id="results"></div>
+      </main>
+    </div>
+    <!-- jd-link -->
+    <script type="module" src="../js/genres.js"></script>
+  </body>
 </html>
