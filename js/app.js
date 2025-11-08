@@ -9,6 +9,14 @@ const errorMessage = document.getElementById("error-message");
 const loader = document.getElementById("loader");
 const dropdownContent = document.getElementById("dropdown-content");
 
+// escapeHTML
+function escapeUser(str) {
+  const div = document.createElement("div");
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// genreMap
 let genreMap = {};
 // showLoader
 function showLoader(show) {
@@ -16,6 +24,7 @@ function showLoader(show) {
 }
 // init
 async function init() {
+  // genreMap
   genreMap = await loadGenres();
 
   form.addEventListener("submit", async (e) => {
@@ -59,20 +68,23 @@ searchInput.addEventListener("input", async () => {
       return;
     }
     // for fill all items
-    data.results.slice(0, 8).forEach((movie) => {
+    data.results.slice(0, 4).forEach((movie) => {
       const option = document.createElement("a");
       option.className = "dropdown-item";
       // posterPath
       const posterPath = movie.poster_path
         ? `https://image.tmdb.org/t/p/w92${movie.poster_path}`
-        : "../images/placeholder.png"; 
+        : "../images/placeholder.png";
       // genres
       const genres = movie.genre_ids?.length
-        ? movie.genre_ids.map((id) => genreMap[id]).join("  ")
+        ? movie.genre_ids.map((id) => genreMap[id]).join(" ")
         : "Unknown";
+      // genres
       option.innerHTML = `
         <div class="dropdown-movie">
-          <img src="${posterPath}" alt="${movie.title}" class="dropdown-poster" />
+        <img src=${escapeUser(posterPath)}" alt="${escapeUser(
+        movie.title
+      )}" class="dropdown-poster"/>
           <div class="dropdown-info">
             <p class="movie-title">${movie.title}</p>
             <p class="movie-genres">${genres}</p>
@@ -87,6 +99,7 @@ searchInput.addEventListener("input", async () => {
         dropdownContent.style.display = "none";
         // redirect to details page with TMDB movie id
         window.location.href = `genres.html?id=${movie.id}`;
+        
       });
       dropdownContent.appendChild(option);
     });

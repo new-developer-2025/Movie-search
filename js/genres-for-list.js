@@ -2,16 +2,17 @@ import { API_KEY } from "./config.js";
 import { fetchMovieDetails } from "./api.js";
 import { renderMovieDetails } from "./render.js";
 import { genreDesign } from "./genreDesign.js";
-const { manageInfo, params, movieId } = genreDesign();
 import { discoverTVmaze } from "./api.js";
-import { openGenrePage } from "./api.js";
 
-// escapeUser
+const { manageInfo, params, movieId } = genreDesign();
+
+// escape HTML
 function escapeUser(str) {
   const div = document.createElement("div");
   div.textContent = str;
   return div.innerHTML;
 }
+
 // collectionData
 export async function collectionData() {
   try {
@@ -31,49 +32,45 @@ export async function collectionData() {
 // loadMovieDetails
 export async function loadMovieDetails() {
   try {
-    // genreDesign();
     const response = await fetch(
       `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`
     );
     if (!response.ok)
       throw new Error(`${response.status} ${response.statusText}`);
     const movie = await response.json();
-
     // posterPath
     const posterPath = movie.poster_path
       ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
       : "../images/placeholder.png";
 
-    // discoverTVmaze
-    discoverTVmaze();
     // genres
     const genres =
       movie.genres && movie.genres.length > 0
-        ? movie.genres.map((g) => g.name).join(" ")
+        ? movie.genres.map((g) => g.name).join(", ")
         : "Unknown";
-    // manageInfo
+
     manageInfo.innerHTML = `
-        <img src="${escapeUser(posterPath)}" alt="${escapeUser(
+      <img src="${escapeUser(posterPath)}" alt="${escapeUser(
       movie.title
     )}" class="picture-style"/>
-        <div>
-          <p class="genres"><strong class="letter-color">Genres:</strong> ${genres}</p>
-          <p class="overview"><strong class="letter-color">Overview:</strong> ${
-            movie.overview
-          }</p>
-          <p class="release top-position"><strong class="letter-color">Release:</strong> ${
-            movie.release_date
-          }</p>
-        </div>
+      <div>
+        <p class="genres"><strong class="letter-color">Genres:</strong> ${genres}</p>
+        <p class="overview"><strong class="letter-color">Overview:</strong> ${
+          movie.overview
+        }</p>
+        <p class="release top-position"><strong class="letter-color">Release:</strong> ${
+          movie.release_date
+        }</p>
+      </div>
     `;
   } catch (error) {
     console.error(error);
   }
 }
 
-// Render TVmaze shows in the page
+// renderTVmazeShows
 function renderTVmazeShows(shows, resultsContainer) {
-  resultsContainer.textContent = ""; // Clear previous content
+  resultsContainer.textContent = "";
 
   if (!shows.length) {
     resultsContainer.textContent = "No shows found for this genre.";
@@ -91,7 +88,7 @@ function renderTVmazeShows(shows, resultsContainer) {
     )}" class="picture-style" />
       <h3>${escapeUser(show.name)}</h3>
       <p><strong>Genres:</strong> ${escapeUser(show.genres)}</p>
-  
+      <p>${show.summary}</p>
     `;
     fragment.appendChild(card);
   });
@@ -99,22 +96,19 @@ function renderTVmazeShows(shows, resultsContainer) {
   resultsContainer.appendChild(fragment);
 }
 
-// Handle user click on dropdown genres
+// dropdown event (optional)
 document.addEventListener("DOMContentLoaded", () => {
   const dropdownItems = document.querySelectorAll(".dropdown-list a");
 
   dropdownItems.forEach((item) => {
     item.addEventListener("click", async (event) => {
       event.preventDefault();
-
       const genre = event.target.textContent.trim();
       manageInfo.textContent = `Loading ${genre} shows...`;
 
       try {
         const shows = await discoverTVmaze(genre);
         renderTVmazeShows(shows, manageInfo);
-        // new
-        openGenrePage(genre);
       } catch (error) {
         console.error("Error fetching TVmaze data:", error);
         manageInfo.textContent = "Failed to load shows. Please try again.";
@@ -122,8 +116,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-
-// collectionData
-collectionData("str-manage");
-// loadMovieDetails
-loadMovieDetails();

@@ -1,8 +1,13 @@
 /* responsive for laptop */
 @media (max-width: 1024px) {
   .dropdown {
+    border-radius: 5px;
     position: relative;
     background-color: #1a1a1a;
+  }
+  .dropbtn {
+    width: 100%;
+    max-width: 200px;
   }
 }
 /* responsive for header elements*/
@@ -15,9 +20,9 @@
     top: 85%;
     right: 0;
   }
-  .action-row {
+  /* .action-row {
     justify-content: space-between;
-  }
+  } */
   .hero-content {
     display: none;
   }
@@ -26,7 +31,7 @@
     top: 0;
     display: block;
     width: 100%;
-    max-width: 550px;
+    padding: 0 20px;
   }
   .overlay ul {
     flex-direction: column;
@@ -91,7 +96,7 @@
     padding: 35px 10px;
   }
   .res-img {
-    max-width: 280px;
+    max-width: 300px;
     background-color: burlywood;
   }
   .release {
@@ -100,5 +105,14 @@
     display: block;
     width: 100%;
     padding: 0 0 0 6px;
+  }
+}
+
+@media (max-width: 375px) {
+  /* .str-manage {
+    margin: 0 10px;
+  } */
+  .picture-style {
+    max-width: 300px;
   }
 }

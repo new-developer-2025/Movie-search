@@ -21,7 +21,6 @@
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  max-width: 1312px;
   height: 491px;
 }
 /* list-items */
@@ -51,17 +50,21 @@
   height: 56px;
 }
 .picture-style {
-  width: 336px;
+  width: 100%;
+  max-width: 336px;
   height: 491px;
+  /* margin-top: 140px; */
   border-radius: 3px;
 }
-
 .release {
   width: 100%;
   max-width: 300px;
   height: 28px;
   position: absolute;
   top: 12%;
+}
+.top-position{
+  top: 10%;
 }
 /* BackButton */
 .back-btn {

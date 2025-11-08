@@ -123,7 +123,8 @@ a {
   width: 100%;
   max-width: 916px;
   height: 100%;
-  min-height: 1000px;
+  height: 100vh;
+  max-height: fit-content;
   display: none;
   position: absolute;
   top: 11%;
@@ -137,7 +138,7 @@ a {
 .dropdown-list {
   display: none;
   position: absolute;
-  top: 100%; 
+  top: 100%;
   right: 2%;
   background-color: #181818;
   border: 1px solid #333;
@@ -242,10 +243,9 @@ a {
   background-color: none;
 }
 .show-activity {
-  /* margin-top: 10px; */
   padding: 19px 0 0 0;
   font-family: sans-serif;
-  font-style: bold;
+  font-weight: bold;
 }
 /* error-message */
 #error-message {

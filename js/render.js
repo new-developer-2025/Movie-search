@@ -1,6 +1,21 @@
 import { IMAGE_BASE } from "./config.js";
 
-// createPosterImg
+// Helper: create elements for properties
+function createElement(tag, options = {}) {
+  const element = document.createElement(tag);
+  const { className, text, html, attrs, children } = options;
+
+  if (className) element.className = className;
+  if (text) element.textContent = text;
+  if (html) element.innerHTML = html;
+  if (attrs)
+    Object.entries(attrs).forEach(([k, v]) => element.setAttribute(k, v));
+  if (children) children.forEach((child) => element.appendChild(child));
+
+  return element;
+}
+
+// Helper: create img with poster
 function createPosterImg(movie, { width = 300, height = 450 } = {}) {
   const img = document.createElement("img");
 
@@ -11,17 +26,17 @@ function createPosterImg(movie, { width = 300, height = 450 } = {}) {
     ? `${IMAGE_BASE}${movie.poster_path}`
     : placeholder;
 
-  img.src = src;
-  img.alt = movie?.title || "Poster";
-  img.width = width;
-  img.height = height;
-  img.loading = "lazy";
-  img.decoding = "async";
+  Object.assign(img, {
+    src,
+    alt: movie?.title || "Poster",
+    width,
+    height,
+    loading: "lazy",
+    decoding: "async",
+  });
 
-  // Responsive images using known TMDB sizes if poster exists
   if (movie?.poster_path) {
     const TMDB_BASE_ROOT = "https://image.tmdb.org/t/p/";
-    // img
     img.srcset = [
       `${TMDB_BASE_ROOT}w92${movie.poster_path} 92w`,
       `${TMDB_BASE_ROOT}w154${movie.poster_path} 154w`,
@@ -34,120 +49,109 @@ function createPosterImg(movie, { width = 300, height = 450 } = {}) {
   }
 
   img.onerror = () => {
-    img.onerror = null;
     img.removeAttribute("srcset");
     img.removeAttribute("sizes");
     img.src = placeholder;
   };
-  
+
   return img;
 }
-// renderResults for TMDB
+
+// Component: for film cart
+function createMovieCard(movie, genreMap) {
+  const poster = createPosterImg(movie);
+  const title = createElement("h3", {
+    className: "title-video",
+    text: movie.title,
+  });
+
+  const genreText =
+    movie.genre_ids?.map((id) => genreMap[id]).join(" ") || "Unknown genres";
+    
+  const genres = createElement("p", {
+    className: "movie-genre",
+    text: genreText,
+  });
+
+  const section = createElement("section", {
+    className: "bg-black",
+    children: [title, genres],
+  });
+
+  const ratingStar = createElement("img", {
+    className: "ratingStar",
+    attrs: { src: "../images/Star.svg", alt: "Rating Star" },
+  });
+
+  const voteAverage = createElement("p", {
+    className: "vote-average",
+    text: movie.vote_average?.toFixed(1),
+  });
+
+  const viewInfoBtn = createElement("a", {
+    className: "view-info-link",
+    text: "View Info",
+    attrs: { href: `movie-details.html?id=${movie.id}` },
+  });
+
+  const actionRow = createElement("div", {
+    className: "action-row",
+    children: [ratingStar, voteAverage, viewInfoBtn],
+  });
+
+  return createElement("div", {
+    className: "movie-card",
+    children: [poster, section, actionRow],
+  });
+}
+
+// Render: List of movie results
 export function renderResults(movies, genreMap, resultsContainer) {
   resultsContainer.textContent = "";
 
-  if (!movies.length) {
+  if (!movies?.length) {
     resultsContainer.textContent = "No movies found.";
     resultsContainer.classList.add("error");
     return;
   }
 
+  const fragment = document.createDocumentFragment();
+
   movies.forEach((movie) => {
-    // card
-    const card = document.createElement("div");
-    card.className = "movie-card";
-    // Poster
-    const poster = createPosterImg(movie);
-    // section
-    const section = document.createElement("section");
-    section.classList.add("bg-black");
-    // title
-    const title = document.createElement("h3");
-    title.classList.add("title-video");
-    title.textContent = movie.title;
-    // genres
-    const genres = document.createElement("p");
-    genres.classList.add("movie-genre");
-    genres.textContent = movie.genre_ids?.length
-      ? movie.genre_ids.map((id) => genreMap[id]).join("/  ")
-      : "Unknown genres";
-
-    section.appendChild(title);
-    section.appendChild(genres);
-
-    // ratingStar
-    const ratingStar = document.createElement("img");
-    ratingStar.src = "../images/Star.svg";
-    ratingStar.classList.add("ratingStar");
-    // Add View Info button
-    const viewInfoBtn = document.createElement("button");
-    viewInfoBtn.className = "view-info-btn";
-    viewInfoBtn.innerHTML = `
-      <a href="movie-details.html?id=${movie.id}" class="view-info-link">
-        View Info
-      </a>
-    `;
-    // actionRow
-    const actionRow = document.createElement("div");
-    actionRow.classList.add("action-row");
-
-    // voteAverage
-    const voteAverage = document.createElement("p");
-    voteAverage.classList.add("vote-average");
-    voteAverage.textContent = `${movie.vote_average}`;
-
-    card.appendChild(poster);
-    card.appendChild(section);
-    actionRow.appendChild(ratingStar);
-    actionRow.appendChild(voteAverage);
-    actionRow.appendChild(viewInfoBtn);
-    resultsContainer.appendChild(card);
-    // add to the card
-    card.appendChild(actionRow);
+    const card = createMovieCard(movie, genreMap);
+    fragment.appendChild(card);
   });
+
+  resultsContainer.appendChild(fragment);
 }
-// renderMovieDetails
+
+// Render: details of film
 export function renderMovieDetails(movie, resultsContainer) {
   resultsContainer.textContent = "";
 
-  // Add backButton
-  const backButton = document.createElement("button");
-  backButton.className = "back-btn";
-  backButton.innerHTML = `
-      <a href="index.html" class="back-link">
-        Back to Search
-      </a>
-    `;
-  // section
-  const section = document.createElement("section");
-  section.classList.add("movie-details");
+  const section = createElement("section", { className: "movie-details" });
 
-  // poster
   const poster = createPosterImg(movie, { width: 300, height: 450 });
   poster.classList.add("picture-style");
 
-  // genres
-  const genres = document.createElement("div");
-  genres.classList.add("genres");
-
-  // genresText
   const genresText =
     movie.genres?.map((g) => g.name).join("  ") || "Unknown genres";
-  genres.innerHTML = `<p><span class="letter-color">Genre </span>${genresText}</p>`;
 
-  // overview
-  const overview = document.createElement("div");
-  overview.innerHTML = `<p><span class="letter-color">overview </span>${movie.overview}</p>`;
-  overview.classList.add("overview");
+  const genres = createElement("div", {
+    className: "genres",
+    html: `<p><span class="letter-color">Genre </span>${genresText}</p>`,
+  });
 
-  // release
-  const release = document.createElement("div");
-  release.innerHTML = `<p>Release: ${movie.release_date}</p>`;
-  release.classList.add("release");
+  const overview = createElement("div", {
+    className: "overview",
+    html: `<p><span class="letter-color">Overview </span>${movie.overview}</p>`,
+  });
 
-  section.appendChild(poster);
-  section.appendChild(genres);
-  section.appendChild(overview);
-  section.appendChild(release);
+  const release = createElement("div", {
+    className: "release",
+    html: `<p>Release: ${movie.release_date}</p>`,
+  });
+
+  section.append(poster, genres, overview, release);
   resultsContainer.appendChild(section);
 }

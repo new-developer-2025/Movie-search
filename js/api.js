@@ -34,11 +34,26 @@ export async function fetchMovieDetails(movieId) {
   if (!response.ok) throw new Error("Failed to fetch details");
   return response.json();
 }
-// search TVmaze shows
-export async function searchShows(query) {
-  const res = await fetch(`https://api.tvmaze.com/search/shows?q=${encodeURIComponent(query)}`);
-  if (!res.ok) throw new Error("Failed to fetch shows");
-  return res.json(); // returns an array
+// discoverTVmaze for get data
+export async function discoverTVmaze(genre) {
+  const response = await fetch(
+    `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(genre)}`
+  );
+
+  if (!response.ok) throw new Error("Failed to fetch shows");
+
+  const data = await response.json();
+
+  return data.map((item) => ({
+    name: item.show.name,
+    image: item.show.image?.medium || "../images/placeholder.png",
+    genres: item.show.genres?.join(", ") || "Unknown",
+    summary: item.show.summary?.slice(0, 130) || "No summary available",
+  }));
 }
-
-
+//  Open a second page in a new tab
+export function openGenrePage(genre) {
+  const url = `genres-list-page.html?genre=${encodeURIComponent(genre)}`;
+  window.open(url, "_blank");
+  // window.location.href = url;
+}

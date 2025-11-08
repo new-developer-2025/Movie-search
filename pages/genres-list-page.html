@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>genres page</title>
+    <title>genres-list-page</title>
+    <!-- in this space show meta tag description-->
     <meta
       name="description"
       content="Find movies, reviews, and ratings on IMDb clone project"
@@ -19,25 +20,18 @@
         <!-- overlay -->
         <nav class="overlay">
           <ul>
-            <li>
+            <li class="mange-header-icon">
               <img src="../images/header-icon.png" alt="IMDb" class="picture" />
             </li>
             <!-- input for search form -->
             <li class="search-box">
               <form action="" role="search" id="search-form" autocomplete="off">
                 <div id="error-message"></div>
-                <input
-                  type="text"
-                  placeholder="Search IMDb"
-                  aria-label="Search IMDb"
-                  id="searchInput"
-                />
+                <input type="text" placeholder="Search IMDb" id="searchInput" />
                 <img
                   src="../images/magnifying-glass.svg"
                   alt="Search"
                   class="magnifying-glass"
-                  width="15px"
-                  height="15px"
                 />
                 <!-- dropdown -->
                 <div class="dropdown-content" id="dropdown-content"></div>
@@ -64,12 +58,27 @@
       </header>
       <!-- loader -->
       <div id="loader" class="loader"></div>
-      <!-- Results -->
-      <main class="bg-none">
-        <section id="str-manage" class="str-manage"></section>
-      </main>
+      <!-- hero-content -->
+      <div class="hero-content">
+        <!-- hero-informatoin -->
+        <div class="hero-information">
+          <section class="parent-hero-title">
+            <h1 class="hero-title white">Dune: Part Two</h1>
+          </section>
+          <!-- hero-description -->
+          <p class="hero-description">
+            Paul Atreides unites with Chani and the Fremen while seeking revenge
+            against the conspirators who destroyed his family.
+          </p>
+          <h4 class="show-activity">In theaters</h4>
+        </div>
+      </div>
     </div>
+    <!-- Results -->
+    <main class="bg-none">
+      <div id="results"></div>
+    </main>
     <!-- js-link -->
-    <script type="module" src="../js/genres.js"></script>
+    <script type="module" src="../js/genres-list-page.js"></script>
   </body>
 </html>
